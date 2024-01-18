@@ -62,6 +62,7 @@ private:
   bool no_piece_in(coords) const;
   static void add_move_with_takes_by_step(const std::array<std::array<std::optional<piece>, 8>, 8> &, std::vector<std::pair<coords, move_type>> &, coords, coords, color);
   bool king_would_be_in_check(coords, coords, promotion) const;
+  void switch_turn();
 
   std::array<std::array<std::optional<piece>, 8>, 8> m_tiles;
   color m_turn;

@@ -19,6 +19,7 @@ board::board() : m_tiles( { std::array<std::optional<piece>, 8>( {  wp(rook) , w
                             std::array<std::optional<piece>, 8>( {  bp(rook) , bp(knight), bp(bishop), bp(queen) ,  bp(king) , bp(bishop), bp(knight),  bp(rook)  } ), } ),
                             m_turn(color::white), m_en_passant_colllumn({}), m_can_castle( {  std::array<bool, 2>( { true, true } ), std::array<bool, 2>( { true, true } ) } ), m_king_coords( { coords(0, 4), coords(7, 4) } ) {}
 message board::check_move(coords src, coords dest, promotion p) {
+  switch_turn();
   return message::confirmation;
 }
 color board::turn() {
@@ -184,4 +185,7 @@ void board::add_move_with_takes_by_step(const std::array<std::array<std::optiona
 }
 bool board::king_would_be_in_check(coords src, coords dest, promotion p) const {
   return false;
+}
+void board::switch_turn() {
+  m_turn = static_cast<color>(!static_cast<bool>(m_turn));
 }
